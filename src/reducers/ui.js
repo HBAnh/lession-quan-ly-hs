@@ -1,27 +1,25 @@
-import * as _hsActions from "../constants/hs";
+import * as _TypesUI from "../constants/ui";
 
 const initialState = {
-  dsHs: [],
+  loading: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case _hsActions.START_FETCH_HS: {
+    case _TypesUI.SHOW_LOADING: {
       return {
         ...state,
-        dsHs: [],
+        loading: true,
       };
     }
-    case _hsActions.SHOW_DANH_SACH_HS: {
-      const { data } = action.payload;
+    case _TypesUI.HIDE_LOADING: {
       return {
         ...state,
-        dsHs: data,
+        loading: false,
       };
     }
     default:
       return state;
   }
 };
-
 export default reducer;

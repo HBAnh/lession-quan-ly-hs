@@ -1,27 +1,25 @@
-import * as _hsActions from "../constants/hs";
+import * as _TypesModal from "../constants/modal";
 
 const initialState = {
-  dsHs: [],
+  openModal: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case _hsActions.START_FETCH_HS: {
+    case _TypesModal.SHOW_MODAL:
       return {
         ...state,
-        dsHs: [],
+        openModal: true,
       };
-    }
-    case _hsActions.SHOW_DANH_SACH_HS: {
-      const { data } = action.payload;
+
+    case _TypesModal.HIDE_MODAL:
       return {
         ...state,
-        dsHs: data,
+        openModal: false,
       };
-    }
+
     default:
       return state;
   }
 };
-
 export default reducer;

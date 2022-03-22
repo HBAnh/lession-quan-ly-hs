@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import ChiTietHS from '../ChiTietHS/ChiTietHS';
 const DanhSachHS = (props) => {
-  const {classes, dsHS} = props;
+  const {classes, dsHs} = props;
   return (
     <TableContainer component={Paper} >
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -23,18 +23,19 @@ const DanhSachHS = (props) => {
           <TableCell align="center">Tuoi</TableCell>
           <TableCell align="center">GioiTinh</TableCell>
           <TableCell align="center">NoiSinh</TableCell>
+          <TableCell align="center">Hành Động</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {
-          dsHS.map((hs, index) => {
+          dsHs.map((hs, index) => {
             return (
               <ChiTietHS key={hs.id} hs={hs} index={index} />
             )
           })
         }
       </TableBody>
-    </Table>
+    </Table>  
   </TableContainer>)
 };
 
