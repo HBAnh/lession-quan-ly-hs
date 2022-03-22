@@ -4,8 +4,9 @@ import { withStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as _modalActions from "../../actions/modal";
+import * as _hsActions from "../../actions/hs";
 import { Button, Grid, MenuItem } from "@mui/material";
 import { Field, reduxForm } from "redux-form";
 import renderTextField from "../components/FormHelper/TextField";
@@ -14,11 +15,26 @@ import validate from "../components/FormHelper/validate";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 
 const ModalHs = (props) => {
-  const { classes, open, invalid, submitting } = props; //invalid vasubmitting lay tu reduxform
+  const { classes, open, invalid, submitting, handleSubmit } = props; //invalid vasubmitting lay tu reduxform
+  const hsEditing = useSelector((state) => state.hs.hsEditing);
   const dispatch = useDispatch();
+  //dong modal
   const handleClose = () => {
     dispatch(_modalActions.hideModal());
   };
+  const onHandleCancel = () => {
+    dispatch(_modalActions.hideModal());
+  };
+  // luu lai
+  const onHandleSubmit = (data) => {
+    const { hoten, tuoi, gioitinh, noisinh } = data;
+    if (hsEditing && hsEditing.id) {
+      dispatch(_hsActions.updateDanhSachHs(hoten, tuoi, gioitinh, noisinh));
+    } else {
+      dispatch(_hsActions.addNewHs(hoten, tuoi, gioitinh, noisinh));
+    }
+  };
+
   return (
     <Modal
       open={open}
@@ -28,15 +44,15 @@ const ModalHs = (props) => {
     >
       <div className={classes.modalContainers}>
         <div className={classes.modalHead}>
-          <span className={classes.title}>Thêm Học Sinh</span>
+          <span className={classes.title}>Hoc Sinh</span>
           <DangerousIcon
-            fontSize="large"  
+            fontSize="large"
             className={classes.iconClose}
             onClick={handleClose}
           />
         </div>
         <div className={classes.modalContent}>
-          <form>
+          <form onSubmit={handleSubmit(onHandleSubmit)}>
             <Grid container spacing={2}>
               <Grid item md={12} className={classes.formText}>
                 <Field
@@ -53,6 +69,7 @@ const ModalHs = (props) => {
                   label="Tuổi"
                   className={classes.textField}
                   name="tuoi"
+                  type="number"
                   component={renderTextField}
                 />
               </Grid>
@@ -64,8 +81,8 @@ const ModalHs = (props) => {
                   name="gioitinh"
                   component={renderSelectField}
                 >
-                  <MenuItem value={0}>Nam</MenuItem>
-                  <MenuItem value={1}>NỮ</MenuItem>
+                  <MenuItem value={true}>Nam</MenuItem>
+                  <MenuItem value={false}>NỮ</MenuItem>
                 </Field>
               </Grid>
               <Grid item md={12} className={classes.formText}>
@@ -79,12 +96,17 @@ const ModalHs = (props) => {
               </Grid>
               <Grid item md={12} className={classes.formBtn}>
                 <Box display="flex" flexDirection="row-reverse" mt={2}>
-                  <Button variant="contained" style={{ float: "right" }}>
+                  <Button
+                    variant="contained"
+                    style={{ float: "right" }}
+                    onClick={onHandleCancel}
+                  >
                     Huỷ Bỏ
                   </Button>
                   <Box mr={1}>
                     <Button
                       variant="contained"
+                      type="submit"
                       disabled={invalid || submitting}
                     >
                       Lưu lại
