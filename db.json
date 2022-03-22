@@ -1,0 +1,32 @@
+{
+    "dsHs": [
+        {
+            "hoten": "Huynh Bao Anh",
+            "tuoi": 25,
+            "gioitinh": true,
+            "noisinh": "Tp.HCM",
+            "id": 1 
+        },
+        {
+            "hoten": "Duong Minh Thuan",
+            "tuoi": 25,
+            "gioitinh": true,
+            "noisinh": "Tp.HCM",
+            "id": 2 
+        },
+        {
+            "hoten": "Do Thuy Trang",
+            "tuoi": 25,
+            "gioitinh": false,
+            "noisinh": "Ha Noi",
+            "id": 3 
+        },
+        {
+            "hoten": "Nguyen Trung Dung",
+            "tuoi": 22,
+            "gioitinh": false,
+            "noisinh": "Vung Tau",
+            "id": 4 
+        }
+    ]
+}
