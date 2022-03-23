@@ -9,7 +9,7 @@ import * as _hsActions from "../../actions/hs";
 import ModalHs from "../ModalHs/ModalHs";
 import PropTypes from "prop-types";
 
-const QuanLyHS = (props) => {
+const QuanLyHs = (props) => {
   const { classes } = props;
   const checkOpen = useSelector((state) => state.modal.openModal);
   const danhSachHs = useSelector((state) => state.hs.dsHs);
@@ -20,7 +20,6 @@ const QuanLyHS = (props) => {
     dispatch(_hsActions.startFetchHs());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   const onHandleShowModal = () => {
     dispatch(_hsActions.setHsEditing(null));
@@ -72,8 +71,8 @@ const QuanLyHS = (props) => {
   );
 };
 
-QuanLyHS.propTypes = {
+QuanLyHs.propTypes = {
   classes: PropTypes.object,
   checkOpen: PropTypes.bool,
 };
-export default withStyles(styles)(QuanLyHS);
+export default withStyles(styles)(QuanLyHs);

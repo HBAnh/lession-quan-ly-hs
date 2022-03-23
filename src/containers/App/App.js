@@ -1,21 +1,15 @@
-import React from 'react';
-import {withStyles} from '@mui/styles';
-import styles from './styles';
-import { Provider } from 'react-redux';
-import configStore from '../../store/configStore';
-// import MenuAppBar from './MenuAppBar/MenuAppBar';
-import QuanLyHS from '../quanlyhs/QuanLyHS';
-import GlobalLoading from '../components/GlobalLoading/GlobalLoading';
-
-const store = configStore();
+import React from "react";
+import { withStyles } from "@mui/styles";
+import styles from "./styles";
+import Dashboard from "./Dashboard/Dashboard";
+import GlobalLoading from "../components/GlobalLoading/GlobalLoading";
 const App = () => {
   return (
-    <Provider store={store}>
-      {/* <MenuAppBar/> */}
+    <div>
       <GlobalLoading />
-      <QuanLyHS />
-    </Provider>
+      <Dashboard />
+    </div>
   );
-}
+};
 
 export default withStyles(styles)(App);

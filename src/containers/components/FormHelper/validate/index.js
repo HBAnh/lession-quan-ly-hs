@@ -1,6 +1,6 @@
 const validate = (values) => {
   const errors = {};
-  const { hoten, tuoi, gioitinh } = values;
+  const { hoten, tuoi } = values;
   if (!hoten) {
     errors.hoten = "vui long nhap ho ten hoc sinh";
   } else if (hoten.trim() && hoten.length < 5) {
