@@ -1,11 +1,8 @@
 import * as _hsActions from "../constants/hs";
 
-export const startFetchHs = (params = {}) => {
+export const startFetchHs = () => {
   return {
     type: _hsActions.START_FETCH_HS,
-    payload: {
-      params,
-    },
   };
 };
 
@@ -18,23 +15,19 @@ export const fetchListHS = (data) => {
   };
 };
 
-export const addNewHs = (hoten, tuoi, gioitinh = true, noisinh) => {
+export const saveStudent = (data) => {
   return {
-    type: _hsActions.ADD_NEW_HS,
-    payload: {
-      hoten,
-      tuoi,
-      gioitinh,
-      noisinh,
-    },
+    type: _hsActions.SAVE_STUDENT,
+    payload: data,
   };
 };
 
-export const addNewHsSuccess = (data) => {
+export const saveStudentSuccess = (data, isAdd) => {
   return {
-    type: _hsActions.ADD_NEW_HS_SUCCESS,
+    type: _hsActions.SAVE_STUDENT_SUCCESS,
     payload: {
       data,
+      isAdd,
     },
   };
 };
@@ -48,26 +41,6 @@ export const setHsEditing = (hsEditing) => {
   };
 };
 
-export const updateDanhSachHs = (hoten, tuoi, gioitinh, noisinh) => {
-  return {
-    type: _hsActions.UPDATE_HS,
-    payload: {
-      hoten,
-      tuoi,
-      gioitinh,
-      noisinh,
-    },
-  };
-};
-
-export const updateDanhSachHsSuccess = (data) => {
-  return {
-    type: _hsActions.UPDATE_HS_SUCCESS,
-    payload: {
-      data,
-    },
-  };
-};
 
 export const deleteDanhSachHs = (id) => {
   return {
@@ -78,11 +51,11 @@ export const deleteDanhSachHs = (id) => {
   };
 };
 
-export const deleteDanhSachHsSuccess = (data) => {
+export const deleteDanhSachHsSuccess = (id) => {
   return {
     type: _hsActions.DELETE_HS_SUCCESS,
     payload: {
-      data,
+      id,
     },
   };
 };

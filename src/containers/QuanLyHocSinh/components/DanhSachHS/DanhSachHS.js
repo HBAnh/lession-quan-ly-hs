@@ -13,30 +13,31 @@ import {
   TableRow,
 } from "@mui/material";
 import ChiTietHS from "../ChiTietHS/ChiTietHS";
+
 const DanhSachHS = (props) => {
-  const { classes, danhSachHs, onClickEdit, onClickDelete } = props;
+  const {  danhSachHs, onClickEdit, onClickDelete } = props;
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead className={classes.tableHead}>
-          <TableRow className={classes.rowHead}>
-            <TableCell align="center">STT</TableCell>
-            <TableCell align="center">HoTen</TableCell>
-            <TableCell align="center">Tuoi</TableCell>
-            <TableCell align="center">GioiTinh</TableCell>
-            <TableCell align="center">NoiSinh</TableCell>
-            <TableCell align="center">Hành Động</TableCell>
+        <TableHead>
+          <TableRow style={{backgroundColor: 'black'}}>
+            <TableCell style={{color: 'white'}} align="center">STT</TableCell>
+            <TableCell style={{color: 'white'}} align="center">Name</TableCell>
+            <TableCell style={{color: 'white'}} align="center">Birthday</TableCell>
+            <TableCell style={{color: 'white'}} align="center">Gender</TableCell>
+            <TableCell style={{color: 'white'}} align="center">HomeTown</TableCell>
+            <TableCell style={{color: 'white'}} align="center">Tasks</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {danhSachHs.map((hocSinh, index) => {
+          {danhSachHs.map((student, index) => {
             return (
               <ChiTietHS
-                key={hocSinh.id}
+                key={student?.id}
                 index={index}
-                hocSinh={hocSinh}
-                onClickEdit={() => onClickEdit(hocSinh)}
-                onClickDelete={() => onClickDelete(hocSinh.id)}
+                student={student}
+                onClickEdit={() => onClickEdit(student)}
+                onClickDelete={() => onClickDelete(student)}
               />
             );
           })}

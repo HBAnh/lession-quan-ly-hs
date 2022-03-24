@@ -87,7 +87,7 @@ function Dashboard(classes) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Menu
+            Dashboard
           </Typography>
         </Toolbar>
       </AppBar>

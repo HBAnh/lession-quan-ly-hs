@@ -1,7 +1,7 @@
-export const API_ENDPOINT = "http://localhost:3000";
+export const API_ENDPOINT = "http://localhost:5160";
 
 export const STATUS_CODE = {
-  FETCH: 200,
+  SUCCESS: 200,
   CREATED: 201,
-  SUCCESS: 304,
+  DELETE: 204,
 };

@@ -4,35 +4,26 @@ import { withStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import * as _modalActions from "../../actions/modal";
-import * as _hsActions from "../../actions/hs";
+import { useDispatch } from "react-redux";
+import * as _modalActions from "../../../../actions/modal";
+import * as _hsActions from "../../../../actions/hs";
 import { Button, Grid, MenuItem } from "@mui/material";
 import { Field, reduxForm } from "redux-form";
-import renderTextField from "../components/FormHelper/TextField";
-import renderSelectField from "../components/FormHelper/SelectField";
-import validate from "../components/FormHelper/validate";
+import renderTextField from "../../../components/FormHelper/TextField";
+import renderSelectField from "../../../components/FormHelper/SelectField";
+import validate from "../../../components/FormHelper/validate";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 
 const ModalHs = (props) => {
   const { classes, open, invalid, submitting, handleSubmit } = props; //invalid vasubmitting lay tu reduxform
-  const hsEditing = useSelector((state) => state.hs.hsEditing);
   const dispatch = useDispatch();
   //dong modal
   const handleClose = () => {
     dispatch(_modalActions.hideModal());
   };
-  const onHandleCancel = () => {
-    dispatch(_modalActions.hideModal());
-  };
   // luu lai
   const onHandleSubmit = (data) => {
-    const { hoten, tuoi, gioitinh, noisinh } = data;
-    if (hsEditing && hsEditing.id) {
-      dispatch(_hsActions.updateDanhSachHs(hoten, tuoi, gioitinh, noisinh));
-    } else {
-      dispatch(_hsActions.addNewHs(hoten, tuoi, gioitinh, noisinh));
-    }
+    dispatch(_hsActions.saveStudent(data));
   };
 
   return (
@@ -56,29 +47,29 @@ const ModalHs = (props) => {
             <Grid container spacing={2}>
               <Grid item md={12} className={classes.formText}>
                 <Field
-                  id="hoten"
+                  id="name"
                   label="Họ và Tên"
                   className={classes.textField}
-                  name="hoten"
+                  name="name"
                   component={renderTextField}
                 />
               </Grid>
               <Grid item md={12} className={classes.formText}>
-                <Field
-                  id="tuoi"
-                  label="Tuổi"
+                {/* <Field
+                  id="birthday"
+                  label="Ngày Sinh"
                   className={classes.textField}
-                  name="tuoi"
-                  type="number"
+                  name="birthday"
                   component={renderTextField}
-                />
+                  type="datetime"
+                /> */}
               </Grid>
               <Grid item md={12} className={classes.formSelect}>
                 <Field
-                  id="gioitinh"
+                  id="gender"
                   label="Giới Tính"
                   className={classes.selectField}
-                  name="gioitinh"
+                  name="gender"
                   component={renderSelectField}
                 >
                   <MenuItem value={true}>Nam</MenuItem>
@@ -87,10 +78,10 @@ const ModalHs = (props) => {
               </Grid>
               <Grid item md={12} className={classes.formText}>
                 <Field
-                  id="noisinh"
+                  id="homeTown"
                   label="Nơi Sinh"
                   className={classes.textField}
-                  name="noisinh"
+                  name="homeTown"
                   component={renderTextField}
                 />
               </Grid>
@@ -99,7 +90,7 @@ const ModalHs = (props) => {
                   <Button
                     variant="contained"
                     style={{ float: "right" }}
-                    onClick={onHandleCancel}
+                    onClick={handleClose}
                   >
                     Huỷ Bỏ
                   </Button>
@@ -130,6 +121,6 @@ ModalHs.propTypes = {
 const withReduxForm = reduxForm({
   form: "HS_MANAGEMENT",
   validate,
-});
+}); 
 
 export default withStyles(styles)(withReduxForm(ModalHs));

@@ -1,13 +1,13 @@
 import * as _hsActions from "../constants/hs";
+import StudentModel from "../models/student.model";
 
 const initialState = {
   dsHs: [],
-  hsEditing: null,
+  hsEditing: new StudentModel(),
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    //hien thi ds
     case _hsActions.START_FETCH_HS: {
       return {
         ...state,
@@ -21,50 +21,38 @@ const reducer = (state = initialState, action) => {
         dsHs: data,
       };
     }
-    //them ds
-    case _hsActions.ADD_NEW_HS: {
+    //save ds
+    case _hsActions.SAVE_STUDENT: {
       return {
         ...state,
+        hsEditing: new StudentModel(),
       };
     }
-    case _hsActions.ADD_NEW_HS_SUCCESS: {
-      const { data } = action.payload;
+    case _hsActions.SAVE_STUDENT_SUCCESS: {
+      const { data, isAdd } = action.payload;
+      let { dsHs } = state;
+      if (isAdd) {
+        dsHs = [...dsHs, data];
+      } else {
+        dsHs = dsHs.map((o) => {
+          if (o.id === data.id) {
+            o = { ...data };
+          }
+          return o;
+        });
+      }
       return {
         ...state,
-        dsHs: [...state.dsHs, data],
+        dsHs,
       };
     }
+
     //set hs editing
     case _hsActions.SET_HS_EDITING: {
       const { hsEditing } = action.payload;
       return {
         ...state,
-        hsEditing: hsEditing,
-      };
-    }
-    //sua hs
-    case _hsActions.UPDATE_HS: {
-      return {
-        ...state,
-      };
-    }
-    case _hsActions.UPDATE_HS_SUCCESS: {
-      const { data } = action.payload;
-      const { dsHs } = state;
-      const index = dsHs.findIndex((item) => item.id === data.id);
-      if (index !== -1) {
-        const newList = [
-          ...dsHs.slice(0, index),
-          data,
-          ...dsHs.slice(index + 1),
-        ];
-        return {
-          ...state,
-          dsHs: newList,
-        };
-      }
-      return {
-        ...state,
+        hsEditing: new StudentModel(hsEditing),
       };
     }
     //xoa hs
@@ -74,10 +62,9 @@ const reducer = (state = initialState, action) => {
       };
     }
     case _hsActions.DELETE_HS_SUCCESS: {
-      const { data: idHs } = action.payload;
-      return {
+        return {
         ...state,
-        dsHs: state.dsHs.filter((item) => item.id !== idHs),
+        dsHs: state.dsHs.filter(ds => ds.id !== action.payload.id)
       };
     }
     default:
