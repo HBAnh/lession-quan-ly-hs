@@ -8,8 +8,9 @@ export const getDanhSachHsAPI = () => {
 };
 
 export const SaveDanhSachHsAPI = (data) => {
+  console.log(data);
   return axiosService.post(`${API_ENDPOINT}/${url}/${"save"}`, data);
 };
-export const deleteHsApi = (idHs) => {
-  return axiosService.delete(`${API_ENDPOINT}/${url}/${"delete"}/${idHs}`);
+export const deleteHsApi = (id) => {
+  return axiosService.delete(`${API_ENDPOINT}/${url}/${"delete"}/${id}`);
 };

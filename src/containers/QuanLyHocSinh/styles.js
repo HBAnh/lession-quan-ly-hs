@@ -5,15 +5,10 @@ const styles = () => ({
         marginRight: 'auto',
         marginLeft: 'auto'
     },
-    title : {
-    },
     tableContainer : {
         marginTop: '20px',
     },
-    btnAdd: {
-    },
-    btnReload: {
-
+    titleClass: {
     }
 })
 

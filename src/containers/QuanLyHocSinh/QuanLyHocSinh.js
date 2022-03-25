@@ -8,6 +8,7 @@ import * as _modalActions from "../../actions/modal";
 import * as _hsActions from "../../actions/hs";
 import ModalHs from "./components/ModalHs/ModalHs";
 import PropTypes from "prop-types";
+import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const QuanLyHocSinh = (props) => {
   const { classes } = props;
@@ -25,12 +26,16 @@ const QuanLyHocSinh = (props) => {
     dispatch(_hsActions.setHsEditing(editingHs ? editingHs : null));
     dispatch(_modalActions.showModal());
   };
-  
+
   const onHandleXoaHs = (data) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`ban co chac muon xoa  ${data.name} ?`)) {
       dispatch(_hsActions.deleteDanhSachHs(data.id));
     }
+  };
+  const onHandleChange = (e) => {
+    const target = e.target;
+    console.log(target.value);
   };
   const renderDanhSachHs = () => {
     let xhtml = null;
@@ -46,15 +51,32 @@ const QuanLyHocSinh = (props) => {
   return (
     <div className={classes.containers}>
       <div>
-        <h1 className={classes.title}>Quản Lý Học Sinh</h1>
+        <h1 className={classes.title}>
+          Quản Lý Học Sinh
+        </h1>
       </div>
-      <div>
-        <Button
-          variant="contained"
-          onClick={onHandleShowModal}
-        >
-          Thêm Học Sinh
-        </Button>
+      <div className={classes.titleClass}>
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl sx={{minWidth: 200}}>
+            <InputLabel id="demo-simple-select-label">Lớp Học</InputLabel>
+            <Select
+              // value={class}
+              label="Lớp Học"
+              onChange={onHandleChange}
+            >
+              <MenuItem value={0}>Lớp 10A1</MenuItem>
+              <MenuItem value={1}>Lớp 10A2</MenuItem>
+              <MenuItem value={2}>Lớp 10A3</MenuItem>
+            </Select>
+          </FormControl>
+          <Button
+            style={{ marginLeft: "20px", height: 55 }}
+            variant="contained"
+            onClick={onHandleShowModal}
+          >
+            Thêm Học Sinh
+          </Button>
+        </Box>
       </div>
       <div className={classes.tableContainer}>
         {renderDanhSachHs()}
@@ -70,4 +92,5 @@ QuanLyHocSinh.propTypes = {
   classes: PropTypes.object,
   checkOpen: PropTypes.bool,
 };
+
 export default withStyles(styles)(QuanLyHocSinh);

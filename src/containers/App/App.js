@@ -1,6 +1,4 @@
 import React from "react";
-import { withStyles } from "@mui/styles";
-import styles from "./styles";
 import Dashboard from "./Dashboard/Dashboard";
 import GlobalLoading from "../components/GlobalLoading/GlobalLoading";
 const App = () => {
@@ -12,4 +10,4 @@ const App = () => {
   );
 };
 
-export default withStyles(styles)(App);
+export default App;

@@ -15,18 +15,31 @@ import {
 import ChiTietHS from "../ChiTietHS/ChiTietHS";
 
 const DanhSachHS = (props) => {
-  const {  danhSachHs, onClickEdit, onClickDelete } = props;
+  const { danhSachHs, onClickEdit, onClickDelete } = props;
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow style={{backgroundColor: 'black'}}>
-            <TableCell style={{color: 'white'}} align="center">STT</TableCell>
-            <TableCell style={{color: 'white'}} align="center">Name</TableCell>
-            <TableCell style={{color: 'white'}} align="center">Birthday</TableCell>
-            <TableCell style={{color: 'white'}} align="center">Gender</TableCell>
-            <TableCell style={{color: 'white'}} align="center">HomeTown</TableCell>
-            <TableCell style={{color: 'white'}} align="center">Tasks</TableCell>
+    <Paper sx={{ width: '100%', overflow: 'hidden' }} >
+    <TableContainer sx={{ maxHeight: 470 }} >
+      <Table stickyHeader aria-label="sticky table">
+        <TableHead  >
+          <TableRow >
+            <TableCell  align="center">
+              STT
+            </TableCell>
+            <TableCell  align="center">
+              Họ & Tên
+            </TableCell>
+            <TableCell  align="center">
+              Ngày Sinh
+            </TableCell>
+            <TableCell  align="center">
+              Giới Tính
+            </TableCell>
+            <TableCell align="center">
+              Nơi Sinh
+            </TableCell>
+            <TableCell align="center">
+              Tasks
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -44,6 +57,7 @@ const DanhSachHS = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </Paper>
   );
 };
 

@@ -2,16 +2,17 @@ import React from "react";
 import styles from "./styles";
 import { withStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import { Box, Button, Grid, Modal } from "@mui/material";
+import { Box, Button, Grid, MenuItem, Modal } from "@mui/material";
 import { Field, reduxForm } from "redux-form";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import renderTextField from "../../../components/FormHelper/TextField/index";
+import renderSelectField from "../../../components/FormHelper/SelectField/index";
 import * as _modalActions from "../../../../actions/modal";
-import * as _namHocAction from "../../../../actions/namHoc";
-import { validateNamHoc } from "../../../components/FormHelper/validate";
+import * as _lopHocActions from "../../../../actions/lopHoc";
 import { useDispatch } from "react-redux";
+import { validateLopHoc } from "../../../components/FormHelper/validate";
 
-const ModalNamHoc = (props) => {
+const ModalLopHoc = (props) => {
   const { open, classes, invalid, submitting, handleSubmit } = props;
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ const ModalNamHoc = (props) => {
     dispatch(_modalActions.hideModal());
   };
   const onHandleSubmit = (_data) => {
-    dispatch(_namHocAction.saveNamHoc(_data));
+    dispatch(_lopHocActions.saveLopHoc(_data));
   };
   return (
     <Modal
@@ -43,11 +44,25 @@ const ModalNamHoc = (props) => {
               <Grid item md={12} className={classes.formText}>
                 <Field
                   id="name"
-                  label="Tên Năm Học"
-                  className={classes.textField}
                   name="name"
+                  label="Tên Lớp Học"
+                  className={classes.textField}
                   component={renderTextField}
                 />
+              </Grid>
+              <Grid item md={12} className={classes.formSelect}>
+                <Field
+                  id="grade"
+                  name="grade"
+                  label="Khối lớp"
+                  className={classes.selectField}
+                  component={renderSelectField}
+                >
+                  <MenuItem value={"Khác"}>Khác</MenuItem>
+                  <MenuItem value={"Khối 10"}>Khối 10</MenuItem>
+                  <MenuItem value={"Khối 11"}>Khối 11</MenuItem>
+                  <MenuItem value={"Khối 12"}>Khối 12</MenuItem>
+                </Field>
               </Grid>
               <Grid item md={12} className={classes.formBtn}>
                 <Box display="flex" flexDirection="row-reverse" mt={2}>
@@ -77,7 +92,7 @@ const ModalNamHoc = (props) => {
   );
 };
 
-ModalNamHoc.propTypes = {
+ModalLopHoc.propTypes = {
   classes: PropTypes.object,
   open: PropTypes.bool,
   invalid: PropTypes.bool,
@@ -86,7 +101,7 @@ ModalNamHoc.propTypes = {
 
 const withReduxForm = reduxForm({
   form: "NamHoc_MANAGEMENT",
-  validate: validateNamHoc,
+  validate: validateLopHoc,
 });
 
-export default withStyles(styles)(withReduxForm(ModalNamHoc));
+export default withStyles(styles)(withReduxForm(ModalLopHoc));

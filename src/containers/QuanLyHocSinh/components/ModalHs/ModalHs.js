@@ -11,7 +11,7 @@ import { Button, Grid, MenuItem } from "@mui/material";
 import { Field, reduxForm } from "redux-form";
 import renderTextField from "../../../components/FormHelper/TextField";
 import renderSelectField from "../../../components/FormHelper/SelectField";
-import validate from "../../../components/FormHelper/validate";
+import {validateHocSinh} from "../../../components/FormHelper/validate";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 
 const ModalHs = (props) => {
@@ -47,6 +47,7 @@ const ModalHs = (props) => {
             <Grid container spacing={2}>
               <Grid item md={12} className={classes.formText}>
                 <Field
+                fullWidth
                   id="name"
                   label="Họ và Tên"
                   className={classes.textField}
@@ -54,18 +55,19 @@ const ModalHs = (props) => {
                   component={renderTextField}
                 />
               </Grid>
-              <Grid item md={12} className={classes.formText}>
-                {/* <Field
+              {/* <Grid item md={12} className={classes.formText}>
+                 <Field
                   id="birthday"
                   label="Ngày Sinh"
                   className={classes.textField}
                   name="birthday"
                   component={renderTextField}
                   type="datetime"
-                /> */}
-              </Grid>
+                /> *
+              </Grid> */}
               <Grid item md={12} className={classes.formSelect}>
                 <Field
+                fullWidth
                   id="gender"
                   label="Giới Tính"
                   className={classes.selectField}
@@ -78,6 +80,7 @@ const ModalHs = (props) => {
               </Grid>
               <Grid item md={12} className={classes.formText}>
                 <Field
+                fullWidth
                   id="homeTown"
                   label="Nơi Sinh"
                   className={classes.textField}
@@ -120,7 +123,7 @@ ModalHs.propTypes = {
 
 const withReduxForm = reduxForm({
   form: "HS_MANAGEMENT",
-  validate,
+  validate: validateHocSinh,
 }); 
 
 export default withStyles(styles)(withReduxForm(ModalHs));

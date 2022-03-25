@@ -23,14 +23,6 @@ const styles = () => ({
   modalContent: {
     padding:20
   },
-  textField: {
-    width: "100%",
-  },
-  formSelect: {
-    display: "flex",
-    flexWrap: "wrap",
-    width: "100%",
-  },
   iconClose:{
       float: 'right',
       color: 'white'

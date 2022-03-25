@@ -4,7 +4,7 @@ import App from "./App";
 import QuanLyHocSinh from "../QuanLyHocSinh/QuanLyHocSinh";
 import QuanLyNamHoc from "../QuanLyNamHoc/QuanLyNamHoc";
 import NotFoundPage from "../components/NotFoundPage/NotFoundPage";
-import QuanLyLopHoc from '../QuanLyLopHoc/QuanLyLopHoc';
+import QuanLyLopHoc from "../QuanLyLopHoc/QuanLyLopHoc";
 export const Routers = () => {
   return (
     <BrowserRouter>
