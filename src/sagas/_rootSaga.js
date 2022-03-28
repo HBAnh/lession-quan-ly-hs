@@ -2,6 +2,7 @@ import { takeLatest, takeEvery } from "redux-saga/effects";
 import * as _hsActions from "../constants/hs";
 import * as _namHocActions from "../constants/namHoc";
 import * as _lopHocActions from "../constants/lopHoc";
+import * as _studentClassActions from "../constants/studentClass";
 import { saveStudentSaga, deleteHsSaga, watchFetchDanhSachHS } from "./hs";
 import {
   watchFetchLishNamHoc,
@@ -9,8 +10,15 @@ import {
   deleteNamHocSaga,
 } from "./namHoc";
 import { watchGetListLopHoc, saveLopHocSaga, deleteLopHocSaga } from "./lopHoc";
+import { getStudentByYearClass } from "./studentClass";
 
 function* _rootSaga() {
+  //Hoc sinh lop hoc
+  yield takeLatest(
+    _studentClassActions.GET_BY_YEAR_CLASS,
+    getStudentByYearClass
+  );
+
   //hoc sinh
   yield takeLatest(_hsActions.START_FETCH_HS, watchFetchDanhSachHS);
   yield takeEvery(_hsActions.SAVE_STUDENT, saveStudentSaga);

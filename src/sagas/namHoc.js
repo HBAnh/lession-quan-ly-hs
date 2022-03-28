@@ -15,6 +15,7 @@ import {
   // deleteNamHocSuccess,
 } from "../actions/namHoc";
 import { hideModal } from "../actions/modal";
+
 export function* watchFetchLishNamHoc() {
   yield put(showLoading());
   const res = yield call(getListSchoolAPI);

@@ -1,0 +1,2 @@
+export const GET_BY_YEAR_CLASS = "GET_BY_YEAR_CLASS";
+export const GET_BY_YEAR_CLASS_SUC = "GET_BY_YEAR_CLASS_SUC";
