@@ -3,26 +3,27 @@ import * as _hsActions from "../constants/hs";
 import * as _namHocActions from "../constants/namHoc";
 import * as _lopHocActions from "../constants/lopHoc";
 import * as _studentClassActions from "../constants/studentClass";
-import { saveStudentSaga, deleteHsSaga, watchFetchDanhSachHS } from "./hs";
+import { saveStudentSaga, deleteHsSaga, getListStudentsSaga } from "./hs";
 import {
   watchFetchLishNamHoc,
   saveNamHocSaga,
   deleteNamHocSaga,
 } from "./namHoc";
 import { watchGetListLopHoc, saveLopHocSaga, deleteLopHocSaga } from "./lopHoc";
-import { getStudentByYearClass } from "./studentClass";
+import { getStudentByYearClass,saveStudentClassSaga } from "./studentClass";
 
 function* _rootSaga() {
   //Hoc sinh lop hoc
   yield takeLatest(
-    _studentClassActions.GET_BY_YEAR_CLASS,
+    _studentClassActions.GET_STUDENT_CLASS,
     getStudentByYearClass
   );
+  yield takeEvery(_studentClassActions.SAVE_STUDENT_CLASS, saveStudentClassSaga);
 
   //hoc sinh
-  yield takeLatest(_hsActions.START_FETCH_HS, watchFetchDanhSachHS);
+  yield takeLatest(_hsActions.GET_STUDENT, getListStudentsSaga);
   yield takeEvery(_hsActions.SAVE_STUDENT, saveStudentSaga);
-  yield takeLatest(_hsActions.DELETE_HS, deleteHsSaga);
+  yield takeLatest(_hsActions.DELETE_STUDENT, deleteHsSaga);
   //nam hoc
   yield takeLatest(_namHocActions.FETCH_NAM_HOC, watchFetchLishNamHoc);
   yield takeEvery(_namHocActions.SAVE_NAM_HOC, saveNamHocSaga);

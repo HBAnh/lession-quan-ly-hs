@@ -6,18 +6,27 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case _typeActions.GET_BY_YEAR_CLASS:
+    case _typeActions.GET_STUDENT_CLASS:
       return {
         ...state,
         listStudentclass: [],
       };
 
-    case _typeActions.GET_BY_YEAR_CLASS_SUC:
+    case _typeActions.GET_STUDENT_CLASS_SUC:
         const { data } = action.payload;
       return {
         ...state,
         listStudentclass: data,
       };
+    case _typeActions.SAVE_STUDENT_CLASS:
+      return {
+        ...state,
+        listStudentclass: [],
+      }
+    case _typeActions.SAVE_STUDENT_CLASS_SUC:
+      return {
+        
+      }
 
     default:
       return state;

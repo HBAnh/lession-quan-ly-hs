@@ -12,7 +12,6 @@ export const getDanhSachHsAPI = () => {
 };
 
 export const SaveDanhSachHsAPI = (data) => {
-  console.log(data);
   return axiosService.post(LIST_URL.SAVE, data);
 };
 export const deleteHsApi = (id) => {

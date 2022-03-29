@@ -6,26 +6,27 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useDispatch } from "react-redux";
 import * as _modalActions from "../../../../actions/modal";
-import * as _hsActions from "../../../../actions/hs";
 import { Button, Grid, MenuItem } from "@mui/material";
 import { Field, reduxForm } from "redux-form";
 import renderTextField from "../../../components/FormHelper/TextField";
 import renderSelectField from "../../../components/FormHelper/SelectField";
-import {validateHocSinh} from "../../../components/FormHelper/validate";
+import { validateHocSinh } from "../../../components/FormHelper/validate";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 
 const ModalHs = (props) => {
-  const { classes, open, invalid, submitting, handleSubmit } = props; //invalid vasubmitting lay tu reduxform
+  const { classes, open, invalid, submitting,onSubmit,handleSubmit } = props; //invalid vasubmitting lay tu reduxform
   const dispatch = useDispatch();
   //dong modal
   const handleClose = () => {
     dispatch(_modalActions.hideModal());
   };
-  // luu lai
-  const onHandleSubmit = (data) => {
-    dispatch(_hsActions.saveStudent(data));
-  };
-
+  // // luu lai
+  // const onHandleSubmit = (data) => {
+  //   dispatch(_hsActions.saveStudent(data));
+  // };
+  const onHandleSubmit = (data) =>{
+    onSubmit(data);
+  }
   return (
     <Modal
       open={open}
@@ -43,11 +44,12 @@ const ModalHs = (props) => {
           />
         </div>
         <div className={classes.modalContent}>
+          {/* <form onSubmit={handleSubmit(onHandleSubmit)}> */}
           <form onSubmit={handleSubmit(onHandleSubmit)}>
             <Grid container spacing={2}>
               <Grid item md={12} className={classes.formText}>
                 <Field
-                fullWidth
+                  fullWidth
                   id="name"
                   label="Họ và Tên"
                   className={classes.textField}
@@ -55,19 +57,9 @@ const ModalHs = (props) => {
                   component={renderTextField}
                 />
               </Grid>
-              {/* <Grid item md={12} className={classes.formText}>
-                 <Field
-                  id="birthday"
-                  label="Ngày Sinh"
-                  className={classes.textField}
-                  name="birthday"
-                  component={renderTextField}
-                  type="datetime"
-                /> *
-              </Grid> */}
               <Grid item md={12} className={classes.formSelect}>
                 <Field
-                fullWidth
+                  fullWidth
                   id="gender"
                   label="Giới Tính"
                   className={classes.selectField}
@@ -79,8 +71,18 @@ const ModalHs = (props) => {
                 </Field>
               </Grid>
               <Grid item md={12} className={classes.formText}>
+              <Field
+                  fullWidth
+                  id="birthday"
+                  label="Ngày Sinh"
+                  className={classes.textField}
+                  name="birthday"
+                  component={renderTextField}
+                />
+              </Grid>
+              <Grid item md={12} className={classes.formText}>
                 <Field
-                fullWidth
+                  fullWidth
                   id="homeTown"
                   label="Nơi Sinh"
                   className={classes.textField}
@@ -124,6 +126,6 @@ ModalHs.propTypes = {
 const withReduxForm = reduxForm({
   form: "HS_MANAGEMENT",
   validate: validateHocSinh,
-}); 
+});
 
 export default withStyles(styles)(withReduxForm(ModalHs));

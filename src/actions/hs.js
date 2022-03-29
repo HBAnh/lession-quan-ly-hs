@@ -1,14 +1,14 @@
 import * as _hsActions from "../constants/hs";
 
-export const startFetchHs = () => {
+export const getStudents = () => {
   return {
-    type: _hsActions.START_FETCH_HS,
+    type: _hsActions.GET_STUDENT,
   };
 };
 
-export const fetchListHS = (data) => {
+export const getStudentsSuccess = (data) => {
   return {
-    type: _hsActions.SHOW_DANH_SACH_HS,
+    type: _hsActions.GET_STUDENT_SUCCESS,
     payload: {
       data,
     },
@@ -18,7 +18,7 @@ export const fetchListHS = (data) => {
 export const saveStudent = (data) => {
   return {
     type: _hsActions.SAVE_STUDENT,
-    payload: data,
+    payload: { data },
   };
 };
 
@@ -41,19 +41,18 @@ export const setHsEditing = (hsEditing) => {
   };
 };
 
-
-export const deleteDanhSachHs = (id) => {
+export const deleteStudent = (id) => {
   return {
-    type: _hsActions.DELETE_HS,
+    type: _hsActions.DELETE_STUDENT,
     payload: {
       id,
     },
   };
 };
 
-export const deleteDanhSachHsSuccess = (id) => {
+export const deleteStudentSuccess = (id) => {
   return {
-    type: _hsActions.DELETE_HS_SUCCESS,
+    type: _hsActions.DELETE_STUDENT_SUCCESS,
     payload: {
       id,
     },

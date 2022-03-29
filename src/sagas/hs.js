@@ -3,18 +3,18 @@ import { getDanhSachHsAPI, SaveDanhSachHsAPI, deleteHsApi } from "../apis/hs";
 import { showLoading, hideLoading } from "../actions/ui";
 import { STATUS_CODE } from "../constants/index";
 import {
-  fetchListHS,
+  getStudentsSuccess,
   saveStudentSuccess,
-  deleteDanhSachHsSuccess,
+  deleteStudentSuccess,
 } from "../actions/hs";
 import { hideModal } from "../actions/modal";
-export function* watchFetchDanhSachHS() {
+export function* getListStudentsSaga() {
   try {
     yield put(showLoading());
     const resp = yield call(getDanhSachHsAPI);
     const { status: statusCode, data } = resp;
     if (statusCode === STATUS_CODE.SUCCESS) {
-      yield put(fetchListHS(data.data));
+      yield put(getStudentsSuccess(data.data));
     }
     yield delay(1000);
     yield put(hideLoading());
@@ -26,10 +26,9 @@ export function* watchFetchDanhSachHS() {
 export function* saveStudentSaga({ payload }) {
   try {
     yield put(showLoading());
-    const resp = yield call(SaveDanhSachHsAPI, {
-      ...payload,
-      birthday: new Date(),
-    });
+    const resp = yield call(SaveDanhSachHsAPI, 
+     payload
+    );
     const { status: statusCode, data } = resp;
     if (statusCode === STATUS_CODE.SUCCESS) {
       const isAdd = payload.id === 0;
@@ -51,7 +50,7 @@ export function* deleteHsSaga({ payload }) {
     const res = yield call(deleteHsApi, payload.id);
     const { status: statusCode } = res;
     if (statusCode === STATUS_CODE.DELETE) {
-      yield put(deleteDanhSachHsSuccess(payload.id));
+      yield put(deleteStudentSuccess(payload.id));
     }
     yield delay(1000);
     yield put(hideLoading());

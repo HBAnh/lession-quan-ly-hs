@@ -13,10 +13,26 @@ import {
   TableRow,
 } from "@mui/material";
 import ChiTietHS from "../ChiTietHS/ChiTietHS";
-import { useSelector } from "react-redux";
 
 const DanhSachHS = (props) => {
   const { onClickEdit, onClickDelete, listStudent } = props;
+  const renderDanhSach = () => {
+    let xhtml = null;
+    if (listStudent) {
+      xhtml = listStudent.map((student, index) => {
+        return (
+          <ChiTietHS
+            key={student?.id}
+            index={index}
+            student={student}
+            onClickEdit={() => onClickEdit(student)}
+            onClickDelete={() => onClickDelete(student)}
+          />
+        );
+      });
+    }
+    return xhtml;
+  };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 450 }}>
@@ -31,19 +47,7 @@ const DanhSachHS = (props) => {
               <TableCell align="center">Tasks</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {listStudent?.map((student, index) => {
-              return (
-                <ChiTietHS
-                  key={student?.id}
-                  index={index}
-                  student={student}
-                  onClickEdit={() => onClickEdit(student)}
-                  onClickDelete={() => onClickDelete(student)}
-                />
-              );
-            })}
-          </TableBody>
+          <TableBody>{renderDanhSach()}</TableBody>
         </Table>
       </TableContainer>
     </Paper>

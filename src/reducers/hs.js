@@ -8,13 +8,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case _hsActions.START_FETCH_HS: {
+    case _hsActions.GET_STUDENT: {
       return {
         ...state,
         dsHs: [],
       };
     }
-    case _hsActions.SHOW_DANH_SACH_HS: {
+    case _hsActions.GET_STUDENT_SUCCESS: {
       const { data } = action.payload;
       return {
         ...state,
@@ -46,7 +46,6 @@ const reducer = (state = initialState, action) => {
         dsHs,
       };
     }
-
     //set hs editing
     case _hsActions.SET_HS_EDITING: {
       const { hsEditing } = action.payload;
@@ -56,12 +55,12 @@ const reducer = (state = initialState, action) => {
       };
     }
     //xoa hs
-    case _hsActions.DELETE_HS: {
+    case _hsActions.DELETE_STUDENT: {
       return {
         ...state,
       };
     }
-    case _hsActions.DELETE_HS_SUCCESS: {
+    case _hsActions.DELETE_STUDENT_SUCCESS: {
         return {
         ...state,
         dsHs: state.dsHs.filter(ds => ds.id !== action.payload.id)

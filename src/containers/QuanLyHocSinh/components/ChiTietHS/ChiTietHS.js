@@ -7,11 +7,13 @@ import PropTypes from "prop-types";
 const ChiTietHS = (props) => {
   const { classes, student, index, onClickEdit, onClickDelete } = props;
   const { id, name, birthday, gender, homeTown } = student;
+  const birth = new Date(birthday);
+  
   return (
     <TableRow className={classes.tableContent} key={id}>
       <TableCell align="center">{index + 1}</TableCell>
       <TableCell align="center">{name}</TableCell>
-      <TableCell align="center">{birthday}</TableCell>
+      <TableCell align="center">{birth.toLocaleDateString()}</TableCell>
       <TableCell align="center">{gender ? "Nam" : "Nu"}</TableCell>
       <TableCell align="center">{homeTown}</TableCell>
       <TableCell align="center">

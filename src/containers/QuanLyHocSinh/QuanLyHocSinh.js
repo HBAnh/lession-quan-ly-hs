@@ -14,23 +14,22 @@ import ClassSelect from "./Shares/ClassSelect";
 
 const QuanLyHocSinh = (props) => {
   const { classes } = props;
-  const [yearId, setYearId] = useState(0);
+  const [schoolYearId, setSchoolYearId] = useState(0);
   const [classId, setClassId] = useState(0);
-  const listStudentClass = useSelector((state) => state.studentClass.listStudentclass);
-  console.log(listStudentClass);
+  const listStudentClass = useSelector(
+    (state) => state.studentClass.listStudentclass
+  );
   const checkOpen = useSelector((state) => state.modal.openModal);
   const initialValues = useSelector((state) => state.hs.hsEditing);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    if (yearId) {
+    if (schoolYearId) {
       if (classId) {
-        dispatch(_studentClassAction.getByYearClass(yearId, classId));
+        dispatch(_studentClassAction.getByYearClass(schoolYearId, classId));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [yearId, classId]);
-
+  }, [schoolYearId, classId]);
 
   const onHandleShowModal = (editingHs) => {
     dispatch(_hsActions.setHsEditing(editingHs ? editingHs : null));
@@ -39,16 +38,23 @@ const QuanLyHocSinh = (props) => {
   const onHandleXoaHs = (data) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`ban co chac muon xoa  ${data.name} ?`)) {
-      dispatch(_hsActions.deleteDanhSachHs(data.id));
+      dispatch(_hsActions.deleteStudent(data.id));
     }
   };
   const onYearChange = (value) => {
-    setYearId(value);
+    setSchoolYearId(value);
   };
   const onClassChange = (value) => {
     setClassId(value);
   };
-
+  const onSubmit = (data) => {
+    const dataPost = {
+      ...data,
+      schoolYearId,
+      classId,
+    };
+    dispatch(_studentClassAction.saveStudentClass(dataPost));
+  };
   return (
     <div className={classes.containers}>
       <div>
@@ -64,7 +70,7 @@ const QuanLyHocSinh = (props) => {
             variant="contained"
             onClick={onHandleShowModal}
           >
-            Thêm Học Sinh
+            Thêm mới HS
           </Button>
         </div>
       </div>
@@ -75,7 +81,11 @@ const QuanLyHocSinh = (props) => {
           onClickDelete={(_data) => onHandleXoaHs(_data)}
         />
         {checkOpen ? (
-          <ModalHs open={checkOpen} initialValues={initialValues} />
+          <ModalHs
+            open={checkOpen}
+            initialValues={initialValues}
+            onSubmit={(_data) => onSubmit(_data)}
+          />
         ) : null}
       </div>
     </div>
