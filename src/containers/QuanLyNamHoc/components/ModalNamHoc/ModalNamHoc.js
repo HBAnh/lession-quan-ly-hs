@@ -42,11 +42,22 @@ const ModalNamHoc = (props) => {
             <Grid container spacing={2}>
               <Grid item md={12} className={classes.formText}>
                 <Field
-                  id="name"
-                  label="Tên Năm Học"
+                  id="fromYear"
+                  label="Từ năm"
                   className={classes.textField}
-                  name="name"
+                  name="fromYear"
                   component={renderTextField}
+                  type="number"
+                />
+              </Grid>
+              <Grid item md={12} className={classes.formText}>
+                <Field
+                  id="toYear"
+                  label="Đến năm"
+                  className={classes.textField}
+                  name="toYear"
+                  component={renderTextField}
+                  type="number"
                 />
               </Grid>
               <Grid item md={12} className={classes.formBtn}>

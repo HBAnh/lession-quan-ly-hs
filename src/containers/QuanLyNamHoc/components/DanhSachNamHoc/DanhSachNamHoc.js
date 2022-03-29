@@ -21,7 +21,10 @@ const DanhSachNamHoc = (props) => {
               STT
             </TableCell>
             <TableCell style={{ color: "white" }} align="center">
-              Name
+              Từ Năm
+            </TableCell>
+            <TableCell style={{ color: "white" }} align="center">
+              Đến Năm
             </TableCell>
             <TableCell style={{ color: "white" }} align="center">
               Tasks

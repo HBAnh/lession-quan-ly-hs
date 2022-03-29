@@ -44,7 +44,7 @@ const YearSelect = ({ onChange }) => {
       xhtml = list.map((o) => {
         return (
           <Option key={o.id} value={o.id}>
-            {o.name}
+            {o.fromYear} - {o.toYear}
           </Option>
         );
       });

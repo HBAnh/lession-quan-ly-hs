@@ -45,7 +45,7 @@ const ClassSelect = ({ onChange }) => {
       xhtml = list.map((o) => {
         return (
           <Option key={o.id} value={o.id}>
-            {o.name}
+            {o.name} - {o.grade}
           </Option>
         );
       });
@@ -53,7 +53,7 @@ const ClassSelect = ({ onChange }) => {
     return xhtml;
   };
   return (
-    <Select value={id} style={{ width: 120, marginRight: '10px' }} onChange={handleChange}>
+    <Select value={id} style={{ width: 135, marginRight: '10px' }} onChange={handleChange}>
       {renderOptions()}
     </Select>
   );

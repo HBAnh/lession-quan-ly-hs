@@ -29,7 +29,7 @@ const QuanLyNamHoc = (props) => {
 
   const onHandleLickDelete = (_data) => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(`bạn có muốn xoá năm học ${_data.nam}?`))
+    if (confirm(`bạn có muốn xoá năm học ${_data.fromYear} - ${_data.toYear}?`))
       dispatch(_namHocActions.deleteNamHoc(_data.id));
   };
 

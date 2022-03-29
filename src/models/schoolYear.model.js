@@ -4,7 +4,8 @@ class schoolYearModel {
       data = {};
     }
     this.id = data.id || 0;
-    this.name = data.name || "";
+    this.fromYear = data.fromYear || 0;
+    this.toYear = data.toYear || 0;
   }
 }
 
