@@ -5,7 +5,6 @@ import DanhSachHS from "./components/DanhSachHS/DanhSachHS";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import * as _modalActions from "../../actions/modal";
-import * as _hsActions from "../../actions/hs";
 import * as _studentClassAction from "../../actions/studentClass";
 import ModalHs from "./components/ModalHs/ModalHs";
 import PropTypes from "prop-types";
@@ -20,25 +19,30 @@ const QuanLyHocSinh = (props) => {
     (state) => state.studentClass.listStudentclass
   );
   const checkOpen = useSelector((state) => state.modal.openModal);
-  const initialValues = useSelector((state) => state.hs.hsEditing);
+  const initialValues = useSelector((state) => state.studentClass.studentEditing);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (schoolYearId) {
-      if (classId) {
-        dispatch(_studentClassAction.getByYearClass(schoolYearId, classId));
-      }
+    if (schoolYearId && classId) {
+      loadData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schoolYearId, classId]);
-
+  }, [schoolYearId, classId, initialValues]);
+  const loadData = () => {
+    dispatch(_studentClassAction.getByYearClass(schoolYearId, classId));
+  }
   const onHandleShowModal = (editingHs) => {
-    dispatch(_hsActions.setHsEditing(editingHs ? editingHs : null));
+    dispatch(_studentClassAction.setStudentClassEditing(editingHs ? editingHs : null));
     dispatch(_modalActions.showModal());
   };
   const onHandleXoaHs = (data) => {
     // eslint-disable-next-line no-restricted-globals
     if (confirm(`ban co chac muon xoa  ${data.name} ?`)) {
-      dispatch(_hsActions.deleteStudent(data.id));
+      const dataDelete = {
+        ...data,
+        schoolYearId,
+        classId,
+      };
+      dispatch(_studentClassAction.deleteStudentClass(dataDelete));
     }
   };
   const onYearChange = (value) => {
@@ -48,12 +52,15 @@ const QuanLyHocSinh = (props) => {
     setClassId(value);
   };
   const onSubmit = (data) => {
+    const studentId = initialValues.id;
     const dataPost = {
       ...data,
       schoolYearId,
       classId,
+      studentId,
     };
     dispatch(_studentClassAction.saveStudentClass(dataPost));
+    loadData();
   };
   return (
     <div className={classes.containers}>
